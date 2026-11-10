@@ -1,0 +1,363 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== ОСНОВА ===== */
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #ffd9b0, #ffeaa7, #ffb88c);
+  background-size: 300% 300%;
+  animation: bgShift 12s ease infinite;
+
+  /* кастомный курсор-прицел */
+  cursor: crosshair;
+}
+
+@keyframes bgShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ===== КАРТОЧКА ===== */
+.card.brut {
+  width: min(960px, 100%);
+  min-height: 540px;
+  display: flex;
+  background: #f5ff4f;
+  border: 4px solid #000;
+  border-radius: 0;
+  box-shadow: 12px 12px 0 #000;
+  overflow: hidden;
+
+  /* появление */
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  animation: cardIn 0.9s cubic-bezier(.34, 1.56, .64, 1) 0.1s forwards;
+}
+
+@keyframes cardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== ФОТО-БЛОК ===== */
+.brut-photo {
+  width: 40%;
+  border-right: 4px solid #000;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.brut-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05);
+  transform: scale(1.08);
+  opacity: 0;
+  animation: photoIn 1.4s ease 0.4s forwards;
+  transition: transform 0.8s cubic-bezier(.2, .8, .2, 1);
+}
+
+@keyframes photoIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.brut-photo:hover img {
+  transform: scale(1.06);
+}
+
+/* бейдж */
+.badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #f5ff4f;
+  border: 3px solid #000;
+  padding: 6px 12px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  box-shadow: 4px 4px 0 #000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 1s forwards;
+}
+
+/* пульсирующий «онлайн»-индикатор */
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #ff2d55;
+  border-radius: 50%;
+  border: 1.5px solid #000;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+/* уголки-«прицел» на фото */
+.frame-corners {
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 1.2s forwards;
+}
+
+.frame-corners span {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #f5ff4f;
+}
+
+.frame-corners span:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.frame-corners span:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.frame-corners span:nth-child(3) {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.frame-corners span:nth-child(4) {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* ===== ИНФО-БЛОК ===== */
+.brut-info {
+  flex: 1;
+  padding: 34px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* stagger-анимация для всех элементов */
+.brut-info>* {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.7s cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+.brut-info>*:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.brut-info>*:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.brut-info>*:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.brut-info>*:nth-child(4) {
+  animation-delay: 1.1s;
+}
+
+.brut-info>*:nth-child(5) {
+  animation-delay: 1.3s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* имя */
+.name-tag {
+  display: inline-block;
+  align-self: flex-start;
+  background: #000;
+  color: #f5ff4f;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 5px 12px;
+}
+
+/* стикер-заголовок */
+.sticker {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(36px, 5.5vw, 58px);
+  line-height: 0.95;
+  color: #000;
+  background: #fff;
+  border: 4px solid #000;
+  padding: 14px 18px;
+  display: inline-block;
+  align-self: flex-start;
+  box-shadow: 8px 8px 0 #000;
+  transform: rotate(-2deg);
+  animation: fadeUp 0.7s cubic-bezier(.2, .8, .2, 1) 0.7s forwards,
+    wiggle 4s ease-in-out 2s infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.sticker:hover {
+  transform: rotate(2deg) scale(1.04);
+  box-shadow: 12px 12px 0 #000;
+  animation-play-state: paused;
+}
+
+@keyframes wiggle {
+
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+/* описание */
+.desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  max-width: 480px;
+}
+
+.cta {
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+}
+
+/* контакты */
+.brut-contacts {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.brut-contacts a {
+  background: #000;
+  color: #f5ff4f;
+  text-decoration: none;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 13.5px;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.brut-contacts a:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0 #000;
+  background: #1a1a1a;
+}
+
+.brut-contacts a:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 780px) {
+  .card.brut {
+    flex-direction: column;
+    min-height: auto;
+    box-shadow: 8px 8px 0 #000;
+  }
+
+  .brut-photo {
+    width: 100%;
+    height: 320px;
+    border-right: none;
+    border-bottom: 4px solid #000;
+  }
+
+  .brut-info {
+    padding: 26px 22px 30px;
+  }
+
+  .sticker {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .brut-contacts a {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+/* отключаем анимации для тех, кто не любит */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
